@@ -9,22 +9,7 @@ end
 
 scut = Map(
 		"scutclient",
-		"华南理工大学客户端 设置",
-		' <input style="margin: 2px;" class="cbi-button cbi-button-apply" type="button" value="'
-				.."Step 1 : 点此处去设置Wi-Fi"
-				..'" onclick="javascript:location.href=\''
-				..luci.dispatcher.build_url("admin/network/wireless/radio0.network1")
-				..'\'"/>'
-				..' <input style="margin: 2px;" class="cbi-button cbi-button-apply" type="button" value="'
-				.."Step 2 : 点此处去设置IP"
-				..'" onclick="javascript:location.href=\''
-				..luci.dispatcher.build_url("admin/network/network")
-				..'\'"/>'
-				..' <input style="margin: 2px;" class="cbi-button cbi-button-apply" type="button" value="'
-				.."Step 3 : 点此处去修改路由器管理密码"
-				..'" onclick="javascript:location.href=\''
-				..luci.dispatcher.build_url("admin/system/admin")
-				..'\'"/>'
+		"华南理工大学客户端 设置"
 )
 function scut.on_commit(self)
 	luci.sys.call("uci commit")

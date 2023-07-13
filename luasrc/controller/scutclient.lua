@@ -67,11 +67,6 @@ function action_status()
 		luci.sys.call("/etc/init.d/scutclient stop > /dev/null")
 		luci.sys.call("/etc/init.d/scutclient start > /dev/null")
 	end
-	if luci.http.formvalue("move_tag") == "1" then
-		luci.sys.call("uci set scutclient.@luci[-1].mainorder=90")
-		luci.sys.call("uci commit")
-		luci.sys.call("rm -rf /tmp/luci-*cache")
-	end
 end
 
 function get_netstat()
