@@ -26,14 +26,6 @@ scut_option:option(Flag, "enable", "启用")
 
 
 
-scut_helper_unicom = scut:section(TypedSection, "option", translate("联通加速"))
-scut_helper.anonymous = true
-scut_helper_unicom:option(Flag, "enable_unicom", "启用联通加速")
-scut_helper_unicom:option(Value, "unicom_username", "联通的用户名")
-scut_helper_unicom:option(Value, "unicom_password", "联通的密码")
-scut_helper_unicom:option(Value, "unicom_server", "联通服务器ip")
-
-
 
 
 
@@ -81,20 +73,6 @@ scut_drcom_nettime.validate = function(self, value, t)
 	return nil, "上网时间格式错误！"
 end
 
--- config ipv6相关
-scut_helper = scut:section(TypedSection, "option", "校园网ipv6")
-scut_helper.anonymous = true
-o = scut_helper:option(Button, "b1", translate("设置ipv6中继"))
-o.inputstyle = "reload"
-o.write = function()
-	luci.sys.call("sh /usr/share/scut_helper/set_ipv6_relay.sh")
-end
-o = scut_helper:option(Button, "b2", translate("还原ipv6设置"))
-o.inputstyle = "reload"
-o.write = function()
-	luci.sys.call("sh /usr/share/scut_helper/reset_ipv6.sh")
-end
-
 --[[ 主机名列表预置
     1.生成一个 DESKTOP-XXXXXXX 的随机
     2.dhcp分配的第一个
@@ -120,4 +98,26 @@ scut_drcom_hostname:value(random_hostname)
 scut_drcom_hostname:value(dhcp_hostnames[1])
 scut_drcom_hostname.default = random_hostname
 
+-- config ipv6相关
+scut_helper = scut:section(TypedSection, "option", "校园网ipv6")
+scut_helper.anonymous = true
+o = scut_helper:option(Button, "b1", translate("设置ipv6中继"))
+o.inputstyle = "reload"
+o.write = function()
+	luci.sys.call("sh /usr/share/scut_helper/set_ipv6_relay.sh")
+end
+o = scut_helper:option(Button, "b2", translate("还原ipv6设置"))
+o.inputstyle = "reload"
+o.write = function()
+	luci.sys.call("sh /usr/share/scut_helper/reset_ipv6.sh")
+end
+
+
+
+scut_helper_unicom = scut:section(TypedSection, "option", translate("联通加速"))
+scut_helper_unicom.anonymous = true
+scut_helper_unicom:option(Flag, "enable_unicom", "启用联通加速")
+scut_helper_unicom:option(Value, "unicom_username", "联通的用户名")
+scut_helper_unicom:option(Value, "unicom_password", "联通的密码")
+scut_helper_unicom:option(Value, "unicom_server", "联通服务器ip")
 return scut
