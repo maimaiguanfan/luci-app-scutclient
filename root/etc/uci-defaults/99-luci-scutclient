@@ -10,5 +10,9 @@ uci -q batch <<-EOF >/dev/null
 	commit scutclient
 EOF
 rm -f /tmp/luci-indexcache
+
+
 /etc/init.d/scutclient enable
+chmod +x /etc/init.d/scut_helper
+/etc/init.d/scut_helper enable
 exit 0

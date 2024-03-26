@@ -12,8 +12,10 @@ scut = Map(
 		"华南理工大学客户端 设置"
 )
 function scut.on_commit(self)
+
 	luci.sys.call("uci commit")
 	luci.sys.call("rm -rf /tmp/luci-*cache")
+	luci.sys.call("sh /usr/share/scut_helper/set_unicom.sh")
 end
 
 -- config option
@@ -21,6 +23,34 @@ scut_option = scut:section(TypedSection, "option", translate("选项"))
 scut_option.anonymous = true
 
 scut_option:option(Flag, "enable", "启用")
+
+-- config ipv6相关
+scut_helper = scut:section(TypedSection, "option", "华工ipv6")
+scut_helper.anonymous = true
+o = s:option(Button, "_run", translate("设置ipv6中继"))
+o.inputstyle = "reload"
+o.write = function()
+	luci.sys.call("sh /usr/share/scut_helper/set_ipv6_relay.sh")
+end
+o = s:option(Button, "_run2", translate("还原ipv6设置"))
+o.inputstyle = "reload"
+o.write = function()
+	luci.sys.call("sh /usr/share/scut_helper/reset_ipv6.sh")
+end
+
+
+
+scut_helper_unicom = scut:section(TypedSection, "option", translate("联通加速"))
+scut_helper.anonymous = true
+scut_helper_unicom:option(Flag, "enable_unicom", "启用联通加速")
+scut_helper_unicom:option(Value, "unicom_username", "联通的用户名")
+scut_helper_unicom:option(Value, "unicom_password", "联通的密码")
+scut_helper_unicom:option(Value, "unicom_server", "联通服务器ip")
+
+
+
+
+
 
 -- config scutclient
 scut_client = scut:section(TypedSection, "scutclient", "用户信息")
