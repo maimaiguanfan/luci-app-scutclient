@@ -24,20 +24,6 @@ scut_option.anonymous = true
 
 scut_option:option(Flag, "enable", "启用")
 
--- config ipv6相关
-scut_helper = scut:section(TypedSection, "option", "校园网ipv6")
-scut_helper.anonymous = true
-o = scut_helper:option(Button, "b1", translate("设置ipv6中继"))
-o.inputstyle = "reload"
-o.write = function()
-	luci.sys.call("sh /usr/share/scut_helper/set_ipv6_relay.sh")
-end
-o = scut_helper:option(Button, "b2", translate("还原ipv6设置"))
-o.inputstyle = "reload"
-o.write = function()
-	luci.sys.call("sh /usr/share/scut_helper/reset_ipv6.sh")
-end
-
 
 
 scut_helper_unicom = scut:section(TypedSection, "option", translate("联通加速"))
@@ -93,6 +79,20 @@ scut_drcom_nettime.validate = function(self, value, t)
 	end
 
 	return nil, "上网时间格式错误！"
+end
+
+-- config ipv6相关
+scut_helper = scut:section(TypedSection, "option", "校园网ipv6")
+scut_helper.anonymous = true
+o = scut_helper:option(Button, "b1", translate("设置ipv6中继"))
+o.inputstyle = "reload"
+o.write = function()
+	luci.sys.call("sh /usr/share/scut_helper/set_ipv6_relay.sh")
+end
+o = scut_helper:option(Button, "b2", translate("还原ipv6设置"))
+o.inputstyle = "reload"
+o.write = function()
+	luci.sys.call("sh /usr/share/scut_helper/reset_ipv6.sh")
 end
 
 --[[ 主机名列表预置
