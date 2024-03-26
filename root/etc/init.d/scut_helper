@@ -10,7 +10,7 @@ start(){
             echo "start"
         fi
     fi 
-   
+
 }
 
 stop(){
