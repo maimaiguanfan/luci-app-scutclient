@@ -8,7 +8,7 @@ log_file = "/tmp/scutclient.log"
 log_file_backup = "/tmp/scutclient.log.backup.log"
 
 function index()
-	if not fs.access("/etc/config/scutclient") then
+	if not nixio.fs.access("/etc/config/scutclient") then
 		return
 	end
 	local uci = require "luci.model.uci".cursor()
