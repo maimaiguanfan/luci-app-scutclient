@@ -15,7 +15,6 @@ function scut.on_commit(self)
 
 	luci.sys.call("uci commit")
 	luci.sys.call("rm -rf /tmp/luci-*cache")
-	luci.sys.call("sh /usr/share/scut_helper/set_unicom.sh")
 end
 
 -- config option
@@ -112,12 +111,4 @@ o.write = function()
 	luci.sys.call("sh /usr/share/scut_helper/reset_ipv6.sh")
 end
 
-
-
-scut_helper_unicom = scut:section(TypedSection, "option", translate("联通加速"))
-scut_helper_unicom.anonymous = true
-scut_helper_unicom:option(Flag, "enable_unicom", "启用联通加速")
-scut_helper_unicom:option(Value, "unicom_username", "联通的用户名")
-scut_helper_unicom:option(Value, "unicom_password", "联通的密码")
-scut_helper_unicom:option(Value, "unicom_server", "联通服务器ip")
 return scut

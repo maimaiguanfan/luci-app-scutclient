@@ -4,16 +4,14 @@ START=99
 STOP=10
 start(){
     # 在这里填写启动服务时需要运行的命令
-    if [ "$(uci get scutclient.@option[0].enable)" == "1" ]; then    
-        if [ "$(uci get scutclient.@option[0].enable_unicom)" == "1" ]; then
-            sleep 10  &&  /usr/share/scut_helper/add_route.sh  &
-            echo "start"
+    if [ "$(uci get scutclient.@option[0].enable)" == "1" ]; then
+            echo "SCUT Client starts" 
         fi
     fi 
 
 }
 
 stop(){
-    echo "END"
+    echo "SCUT Client stops"
 
 }
