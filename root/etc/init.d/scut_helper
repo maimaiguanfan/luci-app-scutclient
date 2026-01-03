@@ -2,16 +2,14 @@
 
 START=99
 STOP=10
+
 start(){
     # 在这里填写启动服务时需要运行的命令
-    if [ "$(uci get scutclient.@option[0].enable)" == "1" ]; then
-            echo "SCUT Client starts" 
-        fi
-    fi 
-
+    if [ "$(uci get scutclient.@option[0].enable)" = "1" ]; then
+        echo "SCUT Client starts"
+    fi
 }
 
 stop(){
     echo "SCUT Client stops"
-
 }
